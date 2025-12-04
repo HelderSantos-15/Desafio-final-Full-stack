@@ -1,0 +1,9 @@
+Links do trabalho final: 
+
+Repositório no GitHub: https://github.com/HelderSantos-15/Framework-web1-cineflix.git
+
+Aplicação publicada (Vercel): https://framework-web1-cineflix.vercel.app/
+
+Projeto no CodeSandbox: https://codesandbox.io/p/github/HelderSantos-15/Framework-web1-cineflix/main?import=true
+
+Vídeo: https://1drv.ms/v/c/c39ded010d423fd0/EcjhcxBC4mZBgsPsNPBE4wMB71FKjMMWpBX-QAHZB70oXg?e=fEi18R
