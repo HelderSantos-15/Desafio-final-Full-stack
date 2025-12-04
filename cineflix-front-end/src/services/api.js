@@ -34,10 +34,10 @@ export const getMovieTrailer = async (id) => {
 };
 
 /* ----------------------------
-   API DO SEU BACKEND LOCAL (ATUALIZADO)
+   API DO SEU BACKEND no render (ATUALIZADO)
 ----------------------------- */
 export const backend = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://desafio-final-full-stack.onrender.com",
   timeout: 10000,
 });
 
