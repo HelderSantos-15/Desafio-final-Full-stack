@@ -12,7 +12,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/auth/register", {
+      const response = await fetch("https://desafio-final-full-stack.onrender.com/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nome, senha })
