@@ -15,14 +15,16 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOriginPatterns(
-                                "http://localhost:5173",                             // front local
-                                "https://desafio-final-full-stack.vercel.app",       // front produção
-                                "https://desafio-final-full-stack-*.vercel.app"     // subdomínios de preview Vercel
+                                "http://localhost:5173",                          // front local
+                                "https://desafio-final-full-stack.vercel.app",    // front produção
+                                "https://desafio-final-full-stack-*.vercel.app"  // subdomínios preview Vercel
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowCredentials(true)
+                        .maxAge(3600); // tempo de cache da política CORS
             }
         };
     }
 }
+
