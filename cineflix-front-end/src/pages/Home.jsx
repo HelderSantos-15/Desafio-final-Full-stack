@@ -1,5 +1,3 @@
-home
-
 import { useEffect, useState } from "react";
 import {
   TextField,
@@ -10,6 +8,7 @@ import {
   Stack,
   Paper,
   Typography,
+  Button,
 } from "@mui/material";
 
 import MovieCard from "../components/MovieCard";
@@ -19,8 +18,11 @@ import {
   getFilmesBackend,
   getCategorias,
 } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
+
   const [movies, setMovies] = useState([]);
   const [localMovies, setLocalMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +33,7 @@ export default function Home() {
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
 
+  // Buscar categorias
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
@@ -43,6 +46,7 @@ export default function Home() {
     fetchCategorias();
   }, []);
 
+  // Buscar filmes
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       const fetchMovies = async () => {
@@ -66,9 +70,7 @@ export default function Home() {
           }
 
           setMovies(tmdbData.results);
-          setTotalPages(
-            tmdbData.total_pages > 500 ? 500 : tmdbData.total_pages
-          );
+          setTotalPages(tmdbData.total_pages > 500 ? 500 : tmdbData.total_pages);
         } catch (err) {
           alert("Erro ao carregar filmes!");
           console.error(err);
@@ -115,15 +117,19 @@ export default function Home() {
           borderRadius: 3,
         }}
       >
-        <Typography
-          variant="h4"
-          fontWeight="bold"
-          color="#fff"
-          mb={3}
-          textAlign="center"
-        >
+        <Typography variant="h4" fontWeight="bold" color="#fff" mb={3} textAlign="center">
           Catálogo de Filmes
         </Typography>
+
+        {/* Botão voltar para home (caso queira incluir em detalhes/favoritos) */}
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mb: 3 }}
+          onClick={() => navigate("/home")}
+        >
+          Voltar para Home
+        </Button>
 
         {/* 🔎 Busca */}
         <TextField
@@ -160,11 +166,7 @@ export default function Home() {
                 key={cat.id}
                 label={cat.nome}
                 clickable
-                color={
-                  categoriaSelecionada === String(cat.id)
-                    ? "primary"
-                    : "default"
-                }
+                color={categoriaSelecionada === String(cat.id) ? "primary" : "default"}
                 onClick={() => setCategoriaSelecionada(String(cat.id))}
                 sx={{ color: "#fff" }}
               />
@@ -183,10 +185,7 @@ export default function Home() {
             }}
           >
             {filmesFinal.map((m) => (
-              <MovieCard
-                key={m.id + (m.poster_path ? "_tmdb" : "_local")}
-                movie={m}
-              />
+              <MovieCard key={m.id + (m.poster_path ? "_tmdb" : "_local")} movie={m} />
             ))}
           </Box>
         ) : (
@@ -211,4 +210,3 @@ export default function Home() {
     </Box>
   );
 }
-
