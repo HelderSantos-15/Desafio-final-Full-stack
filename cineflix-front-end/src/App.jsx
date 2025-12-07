@@ -7,83 +7,81 @@ import DetailsLocal from "./pages/DetailsLocal";
 import Favoritos from "./pages/Favoritos";
 import Header from "./components/Header";
 
-// Componente para rotas privadas
+// Componente para rotas privadas sem token
 function PrivateRoute({ children }) {
-  const isLoggedIn = !!localStorage.getItem("token"); // ajusta conforme você guarda o token
-  return isLoggedIn ? children : <Navigate to="/login" replace />;
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true"; // flag de login
+    return isLoggedIn ? children : <Navigate to="/login" replace />;
 }
 
 function AppContent() {
-  const location = useLocation();
+    const location = useLocation();
 
-  // TELAS ONDE NÃO MOSTRA O HEADER
-  const hideHeader =
-    location.pathname === "/login" ||
-    location.pathname === "/register";
+    // TELAS ONDE NÃO MOSTRA O HEADER
+    const hideHeader = location.pathname === "/login" || location.pathname === "/register";
 
-  return (
-    <>
-      {!hideHeader && <Header />}
+    return (
+        <>
+            {!hideHeader && <Header />}
 
-      <Routes>
-        {/* ROTA RAIZ: redireciona conforme login */}
-        <Route
-          path="/"
-          element={
-            localStorage.getItem("token") ? (
-              <Navigate to="/home" replace />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
+            <Routes>
+                {/* ROTA RAIZ: redireciona conforme login */}
+                <Route
+                    path="/"
+                    element={
+                        localStorage.getItem("isLoggedIn") === "true" ? (
+                            <Navigate to="/home" replace />
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
+                    }
+                />
 
-        {/* Rotas públicas */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+                {/* Rotas públicas */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
 
-        {/* Rotas privadas */}
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/details/:id"
-          element={
-            <PrivateRoute>
-              <Details />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/details-local/:id"
-          element={
-            <PrivateRoute>
-              <DetailsLocal />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/favoritos"
-          element={
-            <PrivateRoute>
-              <Favoritos />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </>
-  );
+                {/* Rotas privadas */}
+                <Route
+                    path="/home"
+                    element={
+                        <PrivateRoute>
+                            <Home />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/details/:id"
+                    element={
+                        <PrivateRoute>
+                            <Details />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/details-local/:id"
+                    element={
+                        <PrivateRoute>
+                            <DetailsLocal />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/favoritos"
+                    element={
+                        <PrivateRoute>
+                            <Favoritos />
+                        </PrivateRoute>
+                    }
+                />
+            </Routes>
+        </>
+    );
 }
 
 export default function App() {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
-  );
+    return (
+        <Router>
+            <AppContent />
+        </Router>
+    );
 }
