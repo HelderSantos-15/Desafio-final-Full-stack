@@ -15,12 +15,12 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(
-                                "http://localhost:5173",          // Frontend dev
-                                "https://SEU-FRONTEND.vercel.app",
-                                "http://localhost:8080"// Frontend produção
+                                "http://localhost:5173",  // para desenvolvimento local
+                                "https://desafio-final-full-stack.vercel.app"  // seu front em produção
                         )
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*");
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
             }
         };
     }
