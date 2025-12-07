@@ -38,7 +38,7 @@ export const getMovieTrailer = async (id) => {
 ----------------------------- */
 export const backend = axios.create({
   baseURL: "https://desafio-final-full-stack.onrender.com",
-  timeout: 30000,
+  timeout: 50000,
   withCredentials: true
 });
 
