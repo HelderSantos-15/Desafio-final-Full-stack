@@ -14,9 +14,10 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(
-                                "http://localhost:5173",  // para desenvolvimento local
-                                "https://desafio-final-full-stack.vercel.app"  // seu front em produção
+                        .allowedOriginPatterns(
+                                "http://localhost:5173",                             // front local
+                                "https://desafio-final-full-stack.vercel.app",       // front produção
+                                "https://desafio-final-full-stack-*.vercel.app"     // subdomínios de preview Vercel
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
