@@ -8,8 +8,7 @@ import {
   Stack,
   Paper,
   Typography,
-  Button,
-} from "@mui/material";
+} from "@mui/material"; // Removido Button, pois não é necessário na Home
 
 import MovieCard from "../components/MovieCard";
 import {
@@ -120,16 +119,6 @@ export default function Home() {
         <Typography variant="h4" fontWeight="bold" color="#fff" mb={3} textAlign="center">
           Catálogo de Filmes
         </Typography>
-
-        {/* Botão voltar para home (caso queira incluir em detalhes/favoritos) */}
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ mb: 3 }}
-          onClick={() => navigate("/home")}
-        >
-          Voltar para Home
-        </Button>
 
         {/* 🔎 Busca */}
         <TextField

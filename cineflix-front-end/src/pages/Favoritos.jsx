@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material"; // ⬅️ ADICIONADO Button
 import MovieCard from "../components/MovieCard";
+import { useNavigate } from "react-router-dom"; // ⬅️ ADICIONADO useNavigate
 
 export default function Favoritos() {
+  const navigate = useNavigate(); // ⬅️ DEFINIDO navigate
   const [favoritos, setFavoritos] = useState([]);
 
   useEffect(() => {
@@ -22,6 +24,16 @@ export default function Favoritos() {
       <Typography variant="h4" fontWeight="bold" mb={3} textAlign="center">
         ⭐ Meus Favoritos
       </Typography>
+
+      {/* ⬅️ BOTÃO VOLTAR PARA HOME */}
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mb: 3 }}
+        onClick={() => navigate("/home")}
+      >
+        ⬅️ Voltar para Home
+      </Button>
 
       {favoritos.length > 0 ? (
         <Box

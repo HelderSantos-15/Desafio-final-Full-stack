@@ -42,7 +42,16 @@ export default function Details() {
 
   return (
     <Box sx={{ padding: 4, backgroundColor: "#141414", minHeight: "100vh", color: "#fff" }}>
-      
+      {/* ⬅️ BOTÃO VOLTAR PARA HOME */}
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mb: 3 }}
+        onClick={() => navigate("/home")}
+      >
+        ⬅️ Voltar para Home
+      </Button>
+
       <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={4}>
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

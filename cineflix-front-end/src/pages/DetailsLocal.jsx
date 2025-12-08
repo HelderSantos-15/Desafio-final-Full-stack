@@ -1,16 +1,17 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // ⬅️ ADICIONADO useNavigate
 import { useEffect, useState } from "react";
 // CORREÇÃO 1: Ajuste o caminho para ser RELATIVO ao arquivo (ex: um nível acima)
 // Assumindo que 'img' está na raiz do seu frontend, use o caminho relativo correto.
 // Substitua '../img/cinema06_12.jpg' pelo caminho RELATIVO correto da sua imagem!
 import minhaImagem from '../img/cinema06_12.jpg'; 
- 
+
 // O backend deve ser exportado do seu api.js
 import { backend } from "../services/api"; 
-import { Box, Typography, CircularProgress } from "@mui/material";
+import { Box, Typography, CircularProgress, Button } from "@mui/material"; // ⬅️ ADICIONADO Button
 
 export default function DetailsLocal() {
   const { id } = useParams();
+  const navigate = useNavigate(); // ⬅️ DEFINIDO navigate
   const [filme, setFilme] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,6 +50,16 @@ export default function DetailsLocal() {
         color: "#fff",
       }}
     >
+      {/* ⬅️ BOTÃO VOLTAR PARA HOME */}
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mb: 3 }}
+        onClick={() => navigate("/home")}
+      >
+        ⬅️ Voltar para Home
+      </Button>
+
       <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={4}>
         <img
           // CORREÇÃO 2: Use o nome da variável de importação dentro de chaves {}
